@@ -1,4 +1,10 @@
 /* Global Styles */
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
 app-menu {
   left: 20px;
   position: fixed;
@@ -8,4 +14,9 @@ app-menu {
 
 .maps-link {
   cursor: pointer;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
 }
