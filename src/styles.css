@@ -29,5 +29,6 @@ app-menu {
   left: 50px;
   padding: 10px;
   position: fixed;
+  width: 490px;
   z-index: 2000;
 }

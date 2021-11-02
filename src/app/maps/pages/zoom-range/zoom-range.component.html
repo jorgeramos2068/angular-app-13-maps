@@ -5,7 +5,16 @@
     <label class="form-label"
       >Zoom: {{ zoomLevel | number: "2.0-2" }} - Lng,Lat: [123, 456]</label
     >
-    <input type="range" class="form-range" id="zoomRange" />
+    <input
+      type="range"
+      class="form-range"
+      id="zoomRange"
+      min="2"
+      max="18"
+      [value]="zoomLevel"
+      (input)="updateZoom(zoomInput.value)"
+      #zoomInput
+    />
   </div>
   <div class="col-12">
     <button class="btn btn-primary" (click)="zoomOut()">-</button>
