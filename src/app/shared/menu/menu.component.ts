@@ -20,8 +20,8 @@ export class MenuComponent {
       name: 'Zoom Range',
     },
     {
-      url: '/maps/markups',
-      name: 'Markups',
+      url: '/maps/markers',
+      name: 'Markers',
     },
     {
       url: '/maps/estates',

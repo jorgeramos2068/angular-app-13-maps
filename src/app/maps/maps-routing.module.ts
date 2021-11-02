@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { EstatesComponent } from './pages/estates/estates.component';
 import { FullScreenComponent } from './pages/full-screen/full-screen.component';
-import { MarkupsComponent } from './pages/markups/markups.component';
+import { MarkersComponent } from './pages/markers/markers.component';
 import { ZoomRangeComponent } from './pages/zoom-range/zoom-range.component';
 
 const routes: Routes = [
@@ -12,7 +12,7 @@ const routes: Routes = [
     children: [
       { path: 'fullscreen', component: FullScreenComponent },
       { path: 'zoom-range', component: ZoomRangeComponent },
-      { path: 'markups', component: MarkupsComponent },
+      { path: 'markers', component: MarkersComponent },
       { path: 'estates', component: EstatesComponent },
       { path: '**', redirectTo: 'fullscreen' },
     ],
