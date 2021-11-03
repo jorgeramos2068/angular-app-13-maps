@@ -46,7 +46,14 @@ export class MarkersComponent implements AfterViewInit {
     });
   }
 
-  goToMarker(): void {
-    console.log('goToMarker');
+  goToMarker(position: number): void {
+    const localMarker: mapboxgl.Marker = this.markers[position].marker;
+    this.map.flyTo({
+      center: localMarker.getLngLat(),
+    });
   }
+
+  saveInLocalStorage(): void {}
+
+  readLocalStorage(): void {}
 }
