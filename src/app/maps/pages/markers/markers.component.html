@@ -8,6 +8,7 @@
     class="list-group-item"
     *ngFor="let marker of markers; let i = index"
     (click)="goToMarker(i)"
+    (contextmenu)="deleteMarker(i)"
     [ngStyle]="{ 'background-color': marker.color }"
   >
     Marker {{ i + 1 }}
