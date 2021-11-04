@@ -22,6 +22,12 @@ app-menu {
   width: 100%;
 }
 
+.mini-map-container {
+  margin: 0;
+  height: 150px;
+  width: 100%;
+}
+
 .zoom-row {
   background-color: white;
   bottom: 50px;
