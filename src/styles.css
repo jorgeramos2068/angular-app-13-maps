@@ -32,3 +32,14 @@ app-menu {
   width: 490px;
   z-index: 2000;
 }
+
+.markers-list {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  z-index: 2000;
+}
+
+.markers-list li {
+  cursor: pointer;
+}

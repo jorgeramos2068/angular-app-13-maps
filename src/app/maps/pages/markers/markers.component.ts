@@ -22,9 +22,21 @@ export class MarkersComponent implements AfterViewInit {
       style: 'mapbox://styles/mapbox/streets-v11',
       zoom: this.zoomLevel,
     });
+  }
 
-    const marker: mapboxgl.Marker = new mapboxgl.Marker()
+  addMarker(): void {
+    const color: string = '#xxxxxx'.replace(/x/g, (y) =>
+      ((Math.random() * 16) | 0).toString(16)
+    );
+    const newMarket: mapboxgl.Marker = new mapboxgl.Marker({
+      draggable: true,
+      color,
+    })
       .setLngLat(this.mapCenter)
       .addTo(this.map);
+  }
+
+  goToMarker(): void {
+    console.log('goToMarker');
   }
 }
