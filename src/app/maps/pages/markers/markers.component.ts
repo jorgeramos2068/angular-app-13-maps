@@ -6,6 +6,11 @@ interface CustomMarker {
   marker: mapboxgl.Marker;
 }
 
+interface LSMarker {
+  color: string;
+  center: [number, number];
+}
+
 @Component({
   selector: 'app-markers',
   templateUrl: './markers.component.html',
@@ -28,6 +33,7 @@ export class MarkersComponent implements AfterViewInit {
       style: 'mapbox://styles/mapbox/streets-v11',
       zoom: this.zoomLevel,
     });
+    this.readLocalStorage();
   }
 
   addMarker(): void {
@@ -44,6 +50,7 @@ export class MarkersComponent implements AfterViewInit {
       color,
       marker: newMarker,
     });
+    this.saveInLocalStorage();
   }
 
   goToMarker(position: number): void {
@@ -53,7 +60,36 @@ export class MarkersComponent implements AfterViewInit {
     });
   }
 
-  saveInLocalStorage(): void {}
+  saveInLocalStorage(): void {
+    const lsArray: LSMarker[] = this.markers.map((m) => {
+      const color = m.color;
+      const { lng, lat } = m.marker.getLngLat();
+      return {
+        color,
+        center: [lng, lat],
+      };
+    });
+    localStorage.setItem('maps-app-markers', JSON.stringify(lsArray));
+  }
 
-  readLocalStorage(): void {}
+  readLocalStorage(): void {
+    const lsMarkersString: string | null =
+      localStorage.getItem('maps-app-markers');
+    if (!lsMarkersString) {
+      return;
+    }
+    const lsArray: LSMarker[] = JSON.parse(lsMarkersString);
+    lsArray.forEach((m) => {
+      const newMarker: mapboxgl.Marker = new mapboxgl.Marker({
+        draggable: true,
+        color: m.color,
+      })
+        .setLngLat(m.center)
+        .addTo(this.map);
+      this.markers.push({
+        color: m.color,
+        marker: newMarker,
+      });
+    });
+  }
 }
