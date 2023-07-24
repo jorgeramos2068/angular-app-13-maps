@@ -40,16 +40,7 @@ export class MarkersComponent implements AfterViewInit {
     const color: string = '#xxxxxx'.replace(/x/g, (y) =>
       ((Math.random() * 16) | 0).toString(16)
     );
-    const newMarker: mapboxgl.Marker = new mapboxgl.Marker({
-      draggable: true,
-      color,
-    })
-      .setLngLat(this.mapCenter)
-      .addTo(this.map);
-    this.markers.push({
-      color,
-      marker: newMarker,
-    });
+    this.createGenericMarker(color, this.mapCenter);
     this.saveInLocalStorage();
   }
 
@@ -80,16 +71,30 @@ export class MarkersComponent implements AfterViewInit {
     }
     const lsArray: LSMarker[] = JSON.parse(lsMarkersString);
     lsArray.forEach((m) => {
-      const newMarker: mapboxgl.Marker = new mapboxgl.Marker({
-        draggable: true,
-        color: m.color,
-      })
-        .setLngLat(m.center)
-        .addTo(this.map);
-      this.markers.push({
-        color: m.color,
-        marker: newMarker,
-      });
+      this.createGenericMarker(m.color, m.center);
     });
+  }
+
+  createGenericMarker(localColor: string, localCenter: [number, number]): void {
+    const newMarker: mapboxgl.Marker = new mapboxgl.Marker({
+      draggable: true,
+      color: localColor,
+    })
+      .setLngLat(localCenter)
+      .addTo(this.map);
+    this.markers.push({
+      color: localColor,
+      marker: newMarker,
+    });
+    newMarker.on('dragend', () => {
+      this.saveInLocalStorage();
+    });
+  }
+
+  deleteMarker(position: number): boolean {
+    this.markers[position].marker.remove();
+    this.markers.splice(position, 1);
+    this.saveInLocalStorage();
+    return false;
   }
 }
