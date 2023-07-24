@@ -1,11 +1,17 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 
 @Component({
   selector: 'app-zoom-range',
   templateUrl: './zoom-range.component.html',
 })
-export class ZoomRangeComponent implements AfterViewInit {
+export class ZoomRangeComponent implements AfterViewInit, OnDestroy {
   @ViewChild('zoomMap') mapDiv!: ElementRef;
   public map!: mapboxgl.Map;
   public zoomLevel: number = 15;
@@ -32,6 +38,12 @@ export class ZoomRangeComponent implements AfterViewInit {
       const { lng, lat } = target.getCenter();
       this.mapCenter = [lng, lat];
     });
+  }
+
+  ngOnDestroy(): void {
+    this.map.off('zoom', () => {});
+    this.map.off('zoomend', () => {});
+    this.map.off('move', () => {});
   }
 
   zoomOut(): void {
