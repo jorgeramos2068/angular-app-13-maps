@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global Styles */
+app-menu {
+  left: 20px;
+  position: fixed;
+  top: 20px;
+  z-index: 1000;
+}
+
+.maps-link {
+  cursor: pointer;
+}
