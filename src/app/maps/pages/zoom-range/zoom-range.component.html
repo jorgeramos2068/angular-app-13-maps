@@ -2,9 +2,13 @@
 
 <div class="row zoom-row">
   <div class="col-12">
-    <label class="form-label"
-      >Zoom: {{ zoomLevel | number: "2.0-2" }} - Lng,Lat: [123, 456]</label
-    >
+    <label class="form-label">
+      <span>Zoom: {{ zoomLevel | number: "2.0-2" }} -</span>
+      <span>
+        Lng,Lat: [{{ mapCenter[0] | number: "2.4-4" }},
+        {{ mapCenter[1] | number: "2.4-4" }}]
+      </span>
+    </label>
     <input
       type="range"
       class="form-range"

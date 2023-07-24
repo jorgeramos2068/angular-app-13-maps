@@ -9,12 +9,13 @@ export class ZoomRangeComponent implements AfterViewInit {
   @ViewChild('zoomMap') mapDiv!: ElementRef;
   public map!: mapboxgl.Map;
   public zoomLevel: number = 15;
+  public mapCenter: [number, number] = [-103.38991542336164, 20.65440818024887];
 
   constructor() {}
 
   ngAfterViewInit(): void {
     this.map = new mapboxgl.Map({
-      center: [-103.38991542336164, 20.65440818024887],
+      center: this.mapCenter,
       container: this.mapDiv.nativeElement,
       minZoom: 2,
       maxZoom: 18,
@@ -24,6 +25,12 @@ export class ZoomRangeComponent implements AfterViewInit {
 
     this.map.on('zoom', (event) => {
       this.zoomLevel = this.map.getZoom();
+    });
+
+    this.map.on('move', (event) => {
+      const target: mapboxgl.Map = event.target;
+      const { lng, lat } = target.getCenter();
+      this.mapCenter = [lng, lat];
     });
   }
 
