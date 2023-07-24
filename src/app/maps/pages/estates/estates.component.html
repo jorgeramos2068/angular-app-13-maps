@@ -1,1 +1,27 @@
-<p>estates works!</p>
+<div class="row mt-3">
+  <div class="col-2"></div>
+  <div class="col">
+    <h1>List of Estates</h1>
+    <hr />
+  </div>
+</div>
+
+<div class="row container">
+  <div class="col-2"></div>
+  <div class="col">
+    <div class="row">
+      <div *ngFor="let estate of estates" class="col-4 mb-2">
+        <div class="card">
+          <app-mini-map
+            [lngLat]="estate.lngLat"
+            class="card-img-top"
+          ></app-mini-map>
+          <div class="card-body">
+            <h5 class="card-title">{{ estate.title }}</h5>
+            <p class="card-text">{{ estate.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
